@@ -41,6 +41,29 @@ public class GameServiceImpl implements GameService {
 		placement.setStatus(InternalPlacement.ONGOING);
 		return placement;
 	}
+	
+	@Override
+	public InternalPlacement initializeGame(String nomJoueur1,int nbCol, int nbRow) {
+		board = new Board();
+		board.initialize(nbCol, nbRow);
+		joueur1 = new InternalJoueur(nomJoueur1);
+		currentPlayer = joueur1;
+		gameEnded = false;
+		InternalPlacement placement = new InternalPlacement();
+		placement.setCurrentPlayer(joueur1);
+		placement.setStatus(InternalPlacement.ONGOING);
+		return placement;
+	}
+	
+	@Override
+	public InternalPlacement initializeGame(int nbCol, int nbRow) {
+		board = new Board();
+		board.initialize(nbCol, nbRow);
+		gameEnded = false;
+		InternalPlacement placement = new InternalPlacement();
+		placement.setStatus(InternalPlacement.ONGOING);
+		return placement;
+	}
 
 	@Override
 	public InternalPlacement playPiece(int x) {
@@ -126,5 +149,26 @@ public class GameServiceImpl implements GameService {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public InternalPlacement setJoueur1(String joueur1) {
+		this.joueur1 = new InternalJoueur(joueur1);
+		this.currentPlayer = this.joueur1;
+		InternalPlacement placement = new InternalPlacement();
+		placement.setStatus(InternalPlacement.NOT_INITIALIZED);
+		return placement;
+	}
+
+	@Override
+	public InternalPlacement setJoueur2(String joueur2) {
+		InternalPlacement placement = new InternalPlacement();
+		placement.setStatus(InternalPlacement.NOT_INITIALIZED);
+		if (joueur1 != null) {
+			this.currentPlayer = this.joueur1;
+			this.joueur2 = new InternalJoueur(joueur2);
+			placement.setStatus(InternalPlacement.ONGOING);
+		}
+		return placement;
 	}
 }

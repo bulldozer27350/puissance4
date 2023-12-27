@@ -10,6 +10,7 @@ public class InternalPlacement {
 	public static final int WIN = 4;
 	public static final int DRAW = 5;
 	public static final int ONGOING = 6;
+	public static final int NOT_INITIALIZED = 7;
 	
 	private Integer status;
 	private InternalJoueur currentPlayer;

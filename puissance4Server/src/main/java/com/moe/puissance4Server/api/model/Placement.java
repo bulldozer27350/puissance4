@@ -7,13 +7,16 @@ public class Placement {
 	public static final int WIN = 4;
 	public static final int DRAW = 5;
 	public static final int ONGOING = 6;
-	
+	public static final int NOT_INITIALIZED = 7;
+
 	private int x;
 	private int y;
-	
+
 	private Integer status;
 	private Joueur currentPlayer;
-	
+
+	private int idPartie;
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -45,6 +48,13 @@ public class Placement {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public void setPartieId(int idPartie) {
+		this.idPartie = idPartie;
+	}
 	
-	
+	public int getPartieId() {
+		return this.idPartie;
+	}
+
 }
