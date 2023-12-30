@@ -1,9 +1,8 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import App from './App.vue'
-/* import TestVue from './Test.vue' */
+import HomeComponent from './HomeComponent.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-createApp(App).use(VueAxios, axios).mount('#app')
+createApp(HomeComponent).use(VueAxios, axios).mount('#app')

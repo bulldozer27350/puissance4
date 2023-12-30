@@ -3,8 +3,6 @@ package com.moe.puissance4back.service;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
-
 import com.moe.puissance4back.api.GameService;
 import com.moe.puissance4back.core.CoordinatesManagement;
 import com.moe.puissance4back.core.InternalJoueur;
@@ -14,7 +12,6 @@ import com.moe.puissance4back.core.model.Coordinate;
 import com.moe.puissance4back.core.model.CoordinatesSeries;
 import com.moe.puissance4back.core.model.InternalPlacement;
 
-@Service
 public class GameServiceImpl implements GameService {
 
 	private Board board;
@@ -37,7 +34,9 @@ public class GameServiceImpl implements GameService {
 		currentPlayer = joueur1;
 		gameEnded = false;
 		InternalPlacement placement = new InternalPlacement();
-		placement.setCurrentPlayer(joueur1);
+		placement.setCurrentPlayer(currentPlayer);
+		placement.setPlayer1(joueur1);
+		placement.setPlayer2(joueur2);
 		placement.setStatus(InternalPlacement.ONGOING);
 		return placement;
 	}
@@ -50,7 +49,9 @@ public class GameServiceImpl implements GameService {
 		currentPlayer = joueur1;
 		gameEnded = false;
 		InternalPlacement placement = new InternalPlacement();
-		placement.setCurrentPlayer(joueur1);
+		placement.setCurrentPlayer(currentPlayer);
+		placement.setPlayer1(joueur1);
+		placement.setPlayer2(joueur2);
 		placement.setStatus(InternalPlacement.ONGOING);
 		return placement;
 	}
@@ -61,6 +62,9 @@ public class GameServiceImpl implements GameService {
 		board.initialize(nbCol, nbRow);
 		gameEnded = false;
 		InternalPlacement placement = new InternalPlacement();
+		placement.setCurrentPlayer(currentPlayer);
+		placement.setPlayer1(joueur1);
+		placement.setPlayer2(joueur2);
 		placement.setStatus(InternalPlacement.ONGOING);
 		return placement;
 	}
@@ -157,6 +161,9 @@ public class GameServiceImpl implements GameService {
 		this.currentPlayer = this.joueur1;
 		InternalPlacement placement = new InternalPlacement();
 		placement.setStatus(InternalPlacement.NOT_INITIALIZED);
+		placement.setPlayer1(this.joueur1);
+		placement.setPlayer2(this.joueur2);
+		placement.setCurrentPlayer(this.currentPlayer);
 		return placement;
 	}
 
@@ -164,11 +171,14 @@ public class GameServiceImpl implements GameService {
 	public InternalPlacement setJoueur2(String joueur2) {
 		InternalPlacement placement = new InternalPlacement();
 		placement.setStatus(InternalPlacement.NOT_INITIALIZED);
-		if (joueur1 != null) {
+		if (joueur1 != null && this.joueur2 == null) {
 			this.currentPlayer = this.joueur1;
 			this.joueur2 = new InternalJoueur(joueur2);
 			placement.setStatus(InternalPlacement.ONGOING);
 		}
+		placement.setPlayer1(this.joueur1);
+		placement.setPlayer2(this.joueur2);
+		placement.setCurrentPlayer(this.currentPlayer);
 		return placement;
 	}
 }

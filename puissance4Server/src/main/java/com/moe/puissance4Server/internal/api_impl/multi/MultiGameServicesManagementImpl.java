@@ -25,7 +25,7 @@ public class MultiGameServicesManagementImpl implements MultiGameServicesManagem
 		GameService gameService = new GameServiceImpl(win);
 		int max = 0;
 		if (!gameServices.isEmpty()) {
-			max = gameServices.keySet().stream().max(Integer::compareTo).get();
+			max = gameServices.keySet().stream().max(Integer::compareTo).get() + 1;
 		}
 		this.gameServices.put(max, gameService);
 		return max;

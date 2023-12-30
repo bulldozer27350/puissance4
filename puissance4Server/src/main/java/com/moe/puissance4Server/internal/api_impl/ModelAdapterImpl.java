@@ -33,6 +33,12 @@ public class ModelAdapterImpl implements ModelAdapter {
 		if (pl.getCurrentPlayer() != null) {
 			p.setCurrentPlayer(this.convert(pl.getCurrentPlayer()));
 		}
+		if (pl.getPlayer1() != null) {
+			p.setJoueur1(this.convert(pl.getPlayer1()));
+		}
+		if (pl.getPlayer2() != null) {
+			p.setJoueur2(this.convert(pl.getPlayer2()));
+		}
 		p.setX(pl.getX());
 		p.setY(pl.getY());
 		return p;

@@ -23,6 +23,8 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     	// Simple (or Streaming) Text Oriented Messaging Protocol
     	// L'ajout de "withSockJS()" permet de rester compatibe avec différents types de navigateurs, 
     	// même ceux qui ne seraient pas compatibles avec les websockets
-        registry.addEndpoint("/websocket").withSockJS();
+        registry.addEndpoint("/gs-guide-websocket").setAllowedOrigins("*");
+//        registry.addEndpoint("/websocket").withSockJS();
+//        registry.addEndpoint("/socket.io/").setAllowedOrigins("*").withSockJS();
     }
 }

@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import com.moe.puissance4back.core.WinChecker;
 import com.moe.puissance4back.core.WinCheckerImpl;
-import com.moe.puissance4back.core.model.Board;
-import com.moe.puissance4back.core.model.CoordinatesSeries;
 import com.moe.puissance4back.core.model.InternalPlacement;
 import com.moe.puissance4back.service.GameServiceImpl;
 

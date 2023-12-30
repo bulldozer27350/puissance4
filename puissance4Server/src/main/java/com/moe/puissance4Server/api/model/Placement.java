@@ -14,8 +14,10 @@ public class Placement {
 
 	private Integer status;
 	private Joueur currentPlayer;
+	private Joueur joueur1;
+	private Joueur joueur2;
 
-	private int idPartie;
+	private int partieId;
 
 	public Integer getStatus() {
 		return status;
@@ -49,12 +51,63 @@ public class Placement {
 		this.y = y;
 	}
 
-	public void setPartieId(int idPartie) {
-		this.idPartie = idPartie;
+	public void setPartieId(int partieId) {
+		this.partieId = partieId;
 	}
 	
 	public int getPartieId() {
-		return this.idPartie;
+		return this.partieId;
 	}
 
+	public Joueur getJoueur1() {
+		return joueur1;
+	}
+
+	public void setJoueur1(Joueur joueur1) {
+		this.joueur1 = joueur1;
+	}
+
+	public Joueur getJoueur2() {
+		return joueur2;
+	}
+
+	public void setJoueur2(Joueur joueur2) {
+		this.joueur2 = joueur2;
+	}
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("status : ");
+		str.append(status);
+		str.append("\n");
+		
+		str.append("joueur1 : ");
+		str.append(joueur1);
+		str.append("\n");
+		
+		str.append("joueur2 : ");
+		str.append(joueur2);
+		str.append("\n");
+		
+		str.append("currentPlayer : ");
+		str.append(currentPlayer);
+		str.append("\n");
+		
+		str.append("x : ");
+		str.append(x);
+		str.append("\n");
+		
+		str.append("y : ");
+		str.append(y);
+		str.append("\n");
+		
+		str.append("partieId : ");
+		str.append(partieId);
+		str.append("\n");
+		
+		return str.toString();
+	}
 }

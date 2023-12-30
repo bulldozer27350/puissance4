@@ -1,56 +1,47 @@
 <template>
-    <h1>Puissance 4</h1>
+  <div id="board" class="blue">
+    <table class="table">
+      <tr v-for="(row, rowIndex) in board" :key="rowIndex">
+        <td v-for="(cell, colIndex) in row" 
+        :key="colIndex">
+          <div
+            :id="'cell-' + rowIndex + '-' + colIndex"
+            :class="[
+              { 'player1': player1Name === cell },
+              { 'player2': player2Name === cell },
+              animation[rowIndex][colIndex] ? 'dropAnimation' + rowIndex : null
+            ]">
+          </div>
+          <div
+            :id="'emptyCell-' + rowIndex + '-' + colIndex"
+            :class="'playerVide'"  
+            @click="playPiece(colIndex)">
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-    <div v-if="!initialized" id="initialization" class="player-inputs">
-      <label for="player1Name">Nom Joueur 1:</label>
-      <input v-model="player1Name" id="player1Name" />
-
-      <label for="player2Name">Nom Joueur 2:</label>
-      <input v-model="player2Name" id="player2Name" />
-      <br/>
-      <button @click="initializeGame" :disabled="gameEnded">Commencer une partie</button>
-    </div>
-
-    <div v-if="initialized" id="board" class="blue">
-      <table class="table">
-        <tr v-for="(row, rowIndex) in board" :key="rowIndex">
-          <td v-for="(cell, colIndex) in row" 
-          :key="colIndex">
-            <div
-              :id="'cell-' + rowIndex + '-' + colIndex"
-              :class="[
-                { 'player1': player1Name === cell },
-                { 'player2': player2Name === cell },
-                animation[rowIndex][colIndex] ? 'dropAnimation' + rowIndex : null
-              ]">
-            </div>
-            <div
-              :id="'emptyCell-' + rowIndex + '-' + colIndex"
-              :class="'playerVide'"  
-              @click="playPiece(colIndex)">
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="joueurEnCours">
-      <p v-if="currentPlayer" :class="{ 'player1': player1Name === currentPlayer.nom, 'player2': player2Name === currentPlayer.nom}">C'est le tour de {{ currentPlayer.nom }}</p>
-      <p v-else>Partie non initialisée</p>
-    </div>
-    <div v-if="gameEnded">
-      PARTIE REMPORTEE PAR : {{ currentPlayer.nom }}
-    </div>
+  <div class="joueurEnCours">
+    <p v-if="currentPlayer" :class="{ 'player1': player1Name === currentPlayer.nom, 'player2': player2Name === currentPlayer.nom}">C'est le tour de {{ currentPlayer.nom }}</p>
+    <p v-else>Partie non initialisée</p>
+  </div>
+  <div v-if="gameEnded">
+    PARTIE REMPORTEE PAR : {{ currentPlayer.nom }}
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
-  name: 'App',
+  name: 'LocalGame',
+  props: [
+    'idPartie',
+    'nomJoueur1'
+  ],
   data() {
     return {
-      initialized : false,
       player1Name: '',
       player2Name: '',
       currentPlayer: null,
@@ -60,12 +51,11 @@ export default {
       gameEnded: false,
     };
   },
-  methods: {
-    async initializeGame() {
-      try {
+  mounted() {
+    try {
         console.log('Initializing game with player names:', this.player1Name, this.player2Name);
 
-        const response = await axios.post(
+        const response = axios.post(
           'http://localhost:4444/api/puissance4/initialize',
           { nomJoueur1: this.player1Name, nomJoueur2: this.player2Name },
           {
@@ -82,15 +72,14 @@ export default {
           this.animation = Array.from({ length: 6 }, () => Array(7).fill(false));
           this.winner = null;
           this.gameEnded = false;
-          this.initialized = true;
         } else {
           console.error('Erreur lors de l\'initialisation de la partie', placement);
         }
       } catch (error) {
         console.error('Erreur lors de l\'initialisation de la partie', error);
       }
-    },
-
+  },
+  methods: {
     async playPiece(columnIndex) {
       if (this.gameEnded) {
         return;

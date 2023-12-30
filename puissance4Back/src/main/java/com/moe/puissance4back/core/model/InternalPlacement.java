@@ -14,6 +14,8 @@ public class InternalPlacement {
 	
 	private Integer status;
 	private InternalJoueur currentPlayer;
+	private InternalJoueur player1;
+	private InternalJoueur player2;
 	
 	private int x;
 	private int y;
@@ -32,6 +34,22 @@ public class InternalPlacement {
 
 	public void setCurrentPlayer(InternalJoueur currentPlayer) {
 		this.currentPlayer = currentPlayer;
+	}
+	
+	public InternalJoueur getPlayer1() {
+		return player1;
+	}
+
+	public void setPlayer1(InternalJoueur player1) {
+		this.player1 = player1;
+	}
+
+	public InternalJoueur getPlayer2() {
+		return player2;
+	}
+
+	public void setPlayer2(InternalJoueur player2) {
+		this.player2 = player2;
 	}
 
 	public int getX() {
