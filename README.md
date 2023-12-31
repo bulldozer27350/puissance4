@@ -15,11 +15,12 @@ découpé en 5 projets
     - de créer une partie (obtention d'un identifiant de la partie)
     - de rejoindre une partie via son identifiant.
   => mettre à jour les @IP dans le fichier configuration/url.js pour spécifier où se trouve le serveur
-  => lancement de l'application via la commande npm run dev -- --host --port 1444
+  => lancement de l'application via la commande [npm run dev -- --host --port 1444]
   => accessible depuis le localhost:1444 (ou via l'adresse donnée par vite lors du démarrage)
 
 Ordre de compilation : 
 1. Puissance4Back
 2. Puissance4Server
-3. Puissance4ApiClient
-4. Puissance4FrontJava
+3. Démarrer le serveur (com.moe.puissance4Server.api.Puissance4ServerApplication)
+4. Puissance4ApiClient
+5. Puissance4FrontJava
